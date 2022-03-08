@@ -8,11 +8,6 @@ const s3 = new aws.S3({
   region: process.env.AWS_REGION,
 })
 
-// aws.config.update({
-//     secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
-//     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//     region: process.env.AWS_REGION,
-// });
 
 const fileFilter = (req, file, cb) => {
   console.log('File check in filefilter:-', file)

@@ -14,7 +14,6 @@ export default function FirstName() {
       <TextField
         label="FirstName"
         variant="outlined"
-        id="firstName"
         type="text"
         {...field}
         error={touched.firstName && Boolean(errors.firstName)}

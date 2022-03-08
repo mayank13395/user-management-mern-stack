@@ -3,6 +3,8 @@ import { useField, useFormikContext } from 'formik'
 import React from 'react'
 
 export default function Password() {
+  console.log('Password Component')
+
   const name = 'password'
   const [field] = useField(name)
   const { errors, touched }: any = useFormikContext()
@@ -12,7 +14,6 @@ export default function Password() {
       <TextField
         label="Password"
         variant="outlined"
-        id="password"
         type="password"
         {...field}
         error={touched.password && Boolean(errors.password)}

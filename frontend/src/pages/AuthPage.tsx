@@ -4,6 +4,8 @@ import Login from '../components/login/Login'
 import Register from '../components/register/Register'
 
 function AuthPage() {
+  console.log('AuthPage Component')
+
   return (
     <Box m={10}>
       <Grid container spacing={8}>

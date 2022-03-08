@@ -7,7 +7,9 @@ import 'dotenv/config'
 import express from 'express'
 import connectDB from './config/database'
 import logger from './logger'
-import { userRouters } from './routes'
+import userRouters from './routes/user/user'
+
+
 
 const app = express()
 connectDB()

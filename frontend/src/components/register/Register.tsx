@@ -26,6 +26,8 @@ const validationSchema = yup.object({
 })
 
 function Register() {
+  console.log('Register component')
+
   const [registerError, setRegisterError] = useState('')
   const [registerSuccess, setRegisterSuccess] = useState(false)
   const [loading, setLoading] = useState(false)

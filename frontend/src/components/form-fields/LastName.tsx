@@ -12,7 +12,6 @@ export default function LastName() {
       <TextField
         label="LasttName"
         variant="outlined"
-        id="lastName"
         type="text"
         {...field}
         error={touched.lastName && Boolean(errors.lastName)}

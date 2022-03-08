@@ -19,11 +19,13 @@ const validationSchema = yup.object({
 })
 
 function Login() {
+  console.log('Login Component')
+
   const [loginError, setLoginError] = useState('')
   const history = useHistory()
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (values: any, { setSubmitting, resetForm }: any) => {
+  const handleSubmit = (values: any) => {
     // call login endpoint
     console.log('On Login Submit:-', values)
     setLoading(true)
@@ -31,9 +33,6 @@ function Login() {
       .then(() => {
         console.log('Login Succes')
         history.push('/')
-        setSubmitting(false)
-        setLoading(false)
-        resetForm()
       })
       .catch(() => {
         setLoginError('Invalid Credentials')

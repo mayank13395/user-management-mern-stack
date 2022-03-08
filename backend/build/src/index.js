@@ -12,7 +12,7 @@ require("dotenv/config");
 const express_1 = __importDefault(require("express"));
 const database_1 = __importDefault(require("./config/database"));
 const logger_1 = __importDefault(require("./logger"));
-const routes_1 = require("./routes");
+const user_1 = __importDefault(require("./routes/user/user"));
 const app = (0, express_1.default)();
 (0, database_1.default)();
 app.use((0, cors_1.default)());
@@ -29,6 +29,6 @@ app.use((req, res, next) => {
     }
     next();
 });
-app.use('/user', routes_1.userRouters);
+app.use('/user', user_1.default);
 exports.default = app;
 //# sourceMappingURL=index.js.map

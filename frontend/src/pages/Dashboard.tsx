@@ -11,6 +11,8 @@ type TProps = {
 }
 
 function Dashboard({ user, handleSetUser }: TProps) {
+  console.log('DashBoard Component:-', user)
+
   useEffect(() => {
     console.log('UseEffect called in Dashboard:-')
 
@@ -30,7 +32,7 @@ function Dashboard({ user, handleSetUser }: TProps) {
   return (
 
     <Box>
-      <ProfilePic photo={user.photo} />
+      <ProfilePic key={user?.photo} photo={user?.photo} />
       <Box>
         <Typography variant="h5">
           FirstName:
@@ -52,4 +54,4 @@ function Dashboard({ user, handleSetUser }: TProps) {
   )
 }
 
-export default Dashboard
+export default React.memo(Dashboard)

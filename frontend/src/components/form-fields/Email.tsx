@@ -12,7 +12,6 @@ export default function Email() {
       <TextField
         label="Email"
         variant="outlined"
-        id="email"
         type="email"
         {...field}
         error={touched.email && Boolean(errors.email)}
