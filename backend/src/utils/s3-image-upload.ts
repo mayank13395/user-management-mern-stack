@@ -8,7 +8,6 @@ const s3 = new aws.S3({
   region: process.env.AWS_REGION,
 })
 
-
 const fileFilter = (req, file, cb) => {
   console.log('File check in filefilter:-', file)
 

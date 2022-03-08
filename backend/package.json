@@ -6,7 +6,7 @@
 	"scripts": {
 		"server": "node build/server.js",
 		"start": "tsc-watch --outDir ./build --onSuccess \"npm run server -- --mode=http\" --onFailure \"echo ERROR! Compilation Failed\"",
-		"lint": "eslint \"**/*.{ts}\""
+		"lint": "eslint \"**/*.{ts,tsx}\""
 	},
 	"author": "Mayank",
 	"license": "ISC",

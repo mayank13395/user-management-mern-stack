@@ -9,8 +9,6 @@ import connectDB from './config/database'
 import logger from './logger'
 import userRouters from './routes/user/user'
 
-
-
 const app = express()
 connectDB()
 app.use(cors())
