@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
-import PrivateRoute from './components/PrivateRoute';
-import AuthPage from './pages/AuthPage';
-import Dashboard from './pages/Dashboard';
-import EditProfile from './pages/EditProfile';
-import NotFoundPage from './pages/NotFoundPage';
-import { IUser } from './types/user';
+import React, { useState } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import './App.css'
+import PrivateRoute from './components/PrivateRoute'
+import AuthPage from './pages/AuthPage'
+import Dashboard from './pages/Dashboard'
+import EditProfile from './pages/EditProfile'
+import NotFoundPage from './pages/NotFoundPage'
+import { IUser } from './types/user'
 
 function App() {
   const [user, setUser] = useState<any>({})
@@ -19,25 +19,29 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <PrivateRoute exact path={'/'}
+          <PrivateRoute
+            exact
+            path="/"
             component={Dashboard}
             data={{
               user,
-              handleSetUser
+              handleSetUser,
             }}
           />
-          <Route exact path={'/auth'} component={AuthPage} />
-          <PrivateRoute exact path={'/edit-profile'}
+          <Route exact path="/auth" component={AuthPage} />
+          <PrivateRoute
+            exact
+            path="/edit-profile"
             component={EditProfile}
             data={{
-              userProfile: user
+              userProfile: user,
             }}
           />
-          <Route exact path={'**'} component={NotFoundPage} />
+          <Route exact path="**" component={NotFoundPage} />
         </Switch>
       </div>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,5 +1,6 @@
-import axios from "axios";
-const USER_ENDPOINT = "http://localhost:8081/user/";
+import axios from 'axios'
+
+const USER_ENDPOINT = 'http://localhost:8081/user/'
 
 interface ILoginParams {
     email: string
@@ -7,29 +8,26 @@ interface ILoginParams {
 }
 
 export const authHeader = () => {
-    const token = JSON.parse(localStorage.getItem('token') || '{}');
-    if (token) {
-        return { 'x-access-token': token };
-    } else {
-        return {
-            'x-access-token': null
-        };
-    }
+  const token = JSON.parse(localStorage.getItem('token') || '{}')
+  if (token) {
+    return { 'x-access-token': token }
+  }
+  return {
+    'x-access-token': null,
+  }
 }
 
-export const login = (params: ILoginParams) => {
-    return axios
-        .post(USER_ENDPOINT + "login", params)
-        .then(response => {
-            if (response.data.token) {
-                localStorage.setItem("token", JSON.stringify(response.data.token));
-            }
-            return response.data;
-        });
-}
+export const login = (params: ILoginParams) => axios
+  .post(`${USER_ENDPOINT}login`, params)
+  .then((response) => {
+    if (response.data.token) {
+      localStorage.setItem('token', JSON.stringify(response.data.token))
+    }
+    return response.data
+  })
 
 export const logout = () => {
-    localStorage.removeItem("token");
+  localStorage.removeItem('token')
 }
 
 interface IRegisterParams {
@@ -39,13 +37,9 @@ interface IRegisterParams {
     password: string
 }
 
-export const register = (params: IRegisterParams) => {
-    return axios.post(USER_ENDPOINT + "register", params);
-}
+export const register = (params: IRegisterParams) => axios.post(`${USER_ENDPOINT}register`, params)
 
-export const getUserProfile = () => {
-    return axios.get(USER_ENDPOINT + "user-details", { headers: authHeader() })
-}
+export const getUserProfile = () => axios.get(`${USER_ENDPOINT}user-details`, { headers: authHeader() })
 
 interface IUpdateUserProfile {
     firstName: string
@@ -54,21 +48,13 @@ interface IUpdateUserProfile {
     password: string
 }
 
-export const updateUserProfile = (params: IUpdateUserProfile) => {
-    return axios.post(USER_ENDPOINT + "update-user-info", params, { headers: authHeader() })
-
-}
+export const updateUserProfile = (params: IUpdateUserProfile) => axios.post(`${USER_ENDPOINT}update-user-info`, params, { headers: authHeader() })
 
 export const getLoggedInStatus = () => {
-    const token = JSON.parse(localStorage.getItem('token') || '{}')
-    console.log("token:-", token);
-    if (typeof token === 'string') return true
-    else return false
+  const token = JSON.parse(localStorage.getItem('token') || '{}')
+  console.log('token:-', token)
+  if (typeof token === 'string') return true
+  return false
 }
 
-
-
-export const updateProfileImage = (formData: any) => {
-    return axios.post(USER_ENDPOINT + "update-profile-pic", formData, { headers: authHeader() })
-}
-
+export const updateProfileImage = (formData: any) => axios.post(`${USER_ENDPOINT}update-profile-pic`, formData, { headers: authHeader() })
