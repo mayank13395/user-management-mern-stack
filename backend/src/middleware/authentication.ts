@@ -7,9 +7,7 @@ const { TOKEN_KEY } = process.env;
 const authenticate = (req, res, next) => {
     const token =
         req.body.token || req.query.token || req.headers["x-access-token"];
-    // console.log("token:-", JSON.stringify(token), req.headers["x-access-token"]);
     logger.debug(`token:-${JSON.stringify(token)}`)
-
 
     if (!token) {
         return res.status(403).send("A token is required for authentication");

@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, CircularProgress, Typography } from '@material-ui/core';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -22,24 +22,30 @@ const validationSchema = yup.object({
 function Login() {
     const [loginError, setLoginError] = useState('')
     const history = useHistory()
+    const [loading, setLoading] = useState(false)
 
-    const handleSubmit = (values: any, { setSubmitting }: any) => {
+    const handleSubmit = (values: any, { setSubmitting, resetForm }: any) => {
         // call login endpoint
         console.log("On Login Submit:-", values);
+        setLoading(true)
         login(values)
             .then(() => {
                 console.log("Login Succes")
                 history.push('/')
                 setSubmitting(false);
+                setLoading(false)
+                resetForm()
             })
             .catch(() => {
                 setLoginError('Invalid Credentials')
+                setLoading(false)
             })
 
     }
 
     return (
         <>
+            {loading && <CircularProgress />}
             <h1>Login</h1>
             {loginError && <Typography color='error'>{loginError}</Typography >}
             <Formik

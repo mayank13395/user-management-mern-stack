@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, CircularProgress, Typography } from '@material-ui/core';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import * as yup from 'yup';
@@ -29,22 +29,30 @@ const validationSchema = yup.object({
 function Register() {
   const [registerError, setRegisterError] = useState('')
   const [registerSuccess, setRegisterSuccess] = useState(false)
+  const [loading, setLoading] = useState(false)
 
 
-  const handleSubmit = (values: any, { setSubmitting }: any) => {
+  const handleSubmit = (values: any, { setSubmitting, resetForm }: any) => {
+    setLoading(true)
     register(values)
       .then(() => {
         console.log("Registeration Succes")
         setRegisterSuccess(true)
         setRegisterError('')
         setSubmitting(false);
+        setLoading(false)
+        resetForm()
+
       })
       .catch(() => {
+        setLoading(false)
         setRegisterError('Something went wrong!Please try after sometime')
+
       })
   }
   return (
     <>
+      {loading && <CircularProgress />}
       <h1>Register</h1>
       {registerError && <Typography color='error'>{registerError}</Typography >}
       {registerSuccess && <Typography >Registration Successful! Please login to continue</Typography >}

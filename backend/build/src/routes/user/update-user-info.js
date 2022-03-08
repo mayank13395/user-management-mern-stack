@@ -24,7 +24,7 @@ const updateUserProfile = (req, res) => __awaiter(void 0, void 0, void 0, functi
         password
     };
     try {
-        // need to update
+        // update user profile to database
         let profile = yield user_model_1.UserModel.findByIdAndUpdate({ _id: req.user.id }, profileObj, { new: true });
         res.json(profile);
     }

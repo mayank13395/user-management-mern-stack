@@ -1,4 +1,4 @@
-import { Box, Button, Link, Typography } from '@material-ui/core';
+import { Box, Button, CircularProgress, Link, Typography } from '@material-ui/core';
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import * as yup from 'yup';
@@ -33,22 +33,29 @@ type TProps = {
 }
 function EditProfile(props: TProps) {
     const [editProfileStatus, setEditProfileStatus] = useState(false)
+    const [loading, setLoading] = useState(false)
+
+    console.log("EditProfile Component:-", props);
 
     const { firstName, lastName, email, password } = props.userProfile
 
     const handleSubmit = (values: any, { setSubmitting }: any) => {
         console.log("Updating profile----");
-
+        setLoading(true)
         updateUserProfile(values)
             .then(() => {
                 console.log("Registeration Succes")
                 setEditProfileStatus(true)
                 setSubmitting(false);
+                setLoading(false)
             })
+            .catch(() => { setLoading(false) })
 
     }
     return (
-        <>
+        <Box m={8}>
+            {loading && <CircularProgress />}
+
             <h1>Edit Profile Info</h1>
             {editProfileStatus && <Typography >Your profile updated Successfully</Typography >}
 
@@ -67,14 +74,10 @@ function EditProfile(props: TProps) {
                         <Button type='submit' variant="contained" color="primary">
                             Update
                         </Button>
-
-                        <Box>
-                            <Link>Change Password</Link>
-                        </Box>
                     </form>
                 )}
             </Formik>
-        </>
+        </Box>
     )
 
 }

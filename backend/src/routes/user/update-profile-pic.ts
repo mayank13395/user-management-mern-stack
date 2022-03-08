@@ -3,7 +3,7 @@ import uploadToS3 from "../../utils/s3-image-upload"
 
 const uploadSingle = uploadToS3.single('image')
 
-const updateProfilePic = async (req, res) => {
+const updateProfilePic = (req, res) => {
     // upload profile pic to s3
     uploadSingle(req, res, function (err) {
         if (err) {

@@ -21,7 +21,7 @@ const updateUserProfile = async (req, res) => {
     }
 
     try {
-        // need to update
+        // update user profile to database
         let profile = await UserModel.findByIdAndUpdate({ _id: req.user.id },
             profileObj,
             { new: true });
