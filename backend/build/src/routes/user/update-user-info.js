@@ -15,17 +15,17 @@ const updateUserProfile = (req, res) => __awaiter(void 0, void 0, void 0, functi
     // if (!errors.isEmpty()) {
     //     return res.status(400).json({ errors: errors.array() });
     // }
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, } = req.body;
     const profileObj = {
         user: req.user.id,
         firstName,
         lastName,
         email,
-        password
+        password,
     };
     try {
         // update user profile to database
-        let profile = yield user_model_1.UserModel.findByIdAndUpdate({ _id: req.user.id }, profileObj, { new: true });
+        const profile = yield user_model_1.UserModel.findByIdAndUpdate({ _id: req.user.id }, profileObj, { new: true });
         res.json(profile);
     }
     catch (err) {

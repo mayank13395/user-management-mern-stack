@@ -12,15 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = require("../../model/user.model");
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let user = yield user_model_1.UserModel.findById(req.user.id);
+        const user = yield user_model_1.UserModel.findById(req.user.id);
         // .select('-password');
         if (!user) {
             return res.status(400).json({ error: [{ msg: 'Access denied!' }] });
         }
-        res.status(200).json({ user: user });
+        return res.status(200).json({ user });
     }
     catch (error) {
-        res.status(500).send('Sever error!');
+        return res.status(500).send('Sever error!');
     }
 });
 exports.default = getUser;

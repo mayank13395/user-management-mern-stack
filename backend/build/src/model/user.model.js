@@ -10,37 +10,38 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const UserSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
-        required: true
+        required: true,
     },
     lastName: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     photo: String,
 }, {
     timestamps: {
         createdAt: 'createdAt',
-        updatedAt: "updatedAt"
-    }
+        updatedAt: 'updatedAt',
+    },
 });
-UserSchema.methods.getAuthToken = function () {
-    console.log("get token called--------");
+UserSchema.methods.getAuthToken = function getAuthToken() {
+    console.log('get token called--------');
     const { TOKEN_KEY } = process.env;
     const token = jsonwebtoken_1.default.sign({
         user: {
-            id: this._id
-        }
+            /* eslint no-underscore-dangle: 0 */
+            id: this._id,
+        },
     }, TOKEN_KEY, { expiresIn: 360000000 });
     return token;
 };
 // Create and export user model
-exports.UserModel = (0, mongoose_1.model)("User", UserSchema);
+exports.UserModel = (0, mongoose_1.model)('User', UserSchema);
 //# sourceMappingURL=user.model.js.map

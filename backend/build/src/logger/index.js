@@ -25,11 +25,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const winston = __importStar(require("winston"));
-const { combine, label, timestamp, printf } = winston.format;
+const { combine, label, timestamp, printf, } = winston.format;
 const appName = 'user-management-backend';
-const myFormat = printf(({ level, message, label, timestamp }) => {
-    return `${timestamp} [${label}] ${level}: ${message}`;
-});
+const myFormat = printf(({ level, message, label, timestamp, }) => `${timestamp} [${label}] ${level}: ${message}`);
 const options = {
     level: 'debug',
     format: combine(label({ label: appName }), timestamp(), myFormat),

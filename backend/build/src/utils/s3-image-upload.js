@@ -9,7 +9,7 @@ const multer_s3_1 = __importDefault(require("multer-s3"));
 const s3 = new aws_sdk_1.default.S3({
     secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    region: process.env.AWS_REGION
+    region: process.env.AWS_REGION,
 });
 // aws.config.update({
 //     secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
@@ -17,24 +17,24 @@ const s3 = new aws_sdk_1.default.S3({
 //     region: process.env.AWS_REGION,
 // });
 const fileFilter = (req, file, cb) => {
-    console.log("File check in filefilter:-", file);
-    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    console.log('File check in filefilter:-', file);
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
         cb(null, true);
     }
     else {
-        cb(new Error("Invalid file type, only JPEG and PNG is allowed!"), false);
+        cb(new Error('Invalid file type, only JPEG and PNG is allowed!'), false);
     }
 };
 const uploadToS3 = (0, multer_1.default)({
     fileFilter,
     storage: (0, multer_s3_1.default)({
-        acl: "public-read",
+        acl: 'public-read',
         s3,
         bucket: process.env.AWS_BUCKET_NAME,
-        metadata: function (req, file, cb) {
+        metadata(req, file, cb) {
             cb(null, { fieldName: 'image' });
         },
-        key: function (req, file, cb) {
+        key(req, file, cb) {
             cb(null, Date.now().toString());
         },
     }),

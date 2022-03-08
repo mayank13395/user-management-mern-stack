@@ -12,16 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_validator_1 = require("express-validator");
-const user_model_1 = require("../../model/user.model");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const express_validator_1 = require("express-validator");
 const logger_1 = __importDefault(require("../../logger"));
+const user_model_1 = require("../../model/user.model");
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
     }
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, } = req.body;
     logger_1.default.debug(`req body:- ${req.body}`);
     try {
         // check if user exists
@@ -29,21 +29,23 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         if (user) {
             return res.status(400).json({ error: [{ msg: 'user already exists' }] });
         }
-        user = new user_model_1.UserModel({ firstName, lastName, email, password, photo: '' });
+        user = new user_model_1.UserModel({
+            firstName, lastName, email, password, photo: '',
+        });
         // encrypt the password
         const salt = yield bcryptjs_1.default.genSalt(10);
-        user.password = yield bcryptjs_1.default.hash(password, 10);
+        user.password = yield bcryptjs_1.default.hash(password, salt);
         // saving to database
         yield user.save();
-        // send jwt 
+        // send jwt
         // Create token
-        let token = user.getAuthToken();
-        console.log("token", token);
-        res.send({ token: token });
+        const token = user.getAuthToken();
+        console.log('token', token);
+        return res.send({ token });
     }
     catch (err) {
         console.log(err.message);
-        res.status(500).send('Sever error!');
+        return res.status(500).send('Sever error!');
     }
 });
 exports.default = registerUser;

@@ -12,10 +12,10 @@ const connectDB = () => {
     mongoose_1.default
         .connect(MONGO_URI)
         .then(() => {
-        console.log("Successfully connected to database");
+        console.log('Successfully connected to database');
     })
         .catch((error) => {
-        console.log("database connection failed. exiting now...");
+        console.log('database connection failed. exiting now...');
         console.error(error);
         process.exit(1);
     });
