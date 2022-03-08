@@ -17,10 +17,11 @@ const updateProfilePic = async (req, res) => {
             });
         }
 
+
         let update = { photo: req.file.location };
 
         // update url in the document database
-        UserModel.findByIdAndUpdate({ user: req.user.id }, update, { new: true })
+        UserModel.findByIdAndUpdate(req.user.id, update, { new: true })
             .then((user) => res.status(200).json({ success: true, user: user }))
             .catch((err) => res.status(400).json({ success: false, error: err }));
 

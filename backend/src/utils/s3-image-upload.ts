@@ -14,6 +14,8 @@ const s3 = new aws.S3({
 // });
 
 const fileFilter = (req, file, cb) => {
+    console.log("File check in filefilter:-", file);
+
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
         cb(null, true);
     } else {
@@ -27,9 +29,9 @@ const uploadToS3 = multer({
         acl: "public-read",
         s3,
         bucket: process.env.AWS_BUCKET_NAME,
-        // metadata: function (req, file, cb) {
-        //     cb(null, { fieldName: file.fieldName });
-        // },
+        metadata: function (req, file, cb) {
+            cb(null, { fieldName: 'image' });
+        },
         key: function (req, file, cb) {
             cb(null, Date.now().toString());
         },

@@ -27,9 +27,12 @@ function App() {
             }}
           />
           <Route exact path={'/auth'} component={AuthPage} />
-          <Route exact path={'/edit-profile'} >
-            <EditProfile userProfile={user} />
-          </Route>
+          <PrivateRoute exact path={'/edit-profile'}
+            component={EditProfile}
+            data={{
+              userProfile: user
+            }}
+          />
           <Route exact path={'**'} component={NotFoundPage} />
         </Switch>
       </div>
