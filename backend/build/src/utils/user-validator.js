@@ -7,16 +7,16 @@ const validateLogin = (0, express_validator_1.check)('password', 'password canno
 const validateFirstName = (0, express_validator_1.check)('firstName', 'firstName is required').not().isEmpty();
 const validateLastName = (0, express_validator_1.check)('lastName', 'lastName is required').not().isEmpty();
 const validatePassword = (0, express_validator_1.check)('password', 'please enter a password with 6 or more character').isLength({
-    min: 6,
+    min: 6
 });
 exports.validateLoginReq = [
     validateEmail,
-    validateLogin,
+    validateLogin
 ];
 exports.validateRegisterReq = [
     validateFirstName,
     validateLastName,
     validateEmail,
-    validatePassword,
+    validatePassword
 ];
 //# sourceMappingURL=user-validator.js.map
